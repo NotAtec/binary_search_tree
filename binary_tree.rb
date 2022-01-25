@@ -3,6 +3,7 @@ require 'pry-byebug'
 # Contains value & children
 class Node
   attr_accessor :data, :left, :right
+
   def initialize(d, l = nil, r = nil)
     @data = d
     @left = l
@@ -14,22 +15,12 @@ end
 class Tree
   include Comparable
   attr_accessor :root
+
   def initialize(arr)
     @root = build_tree(arr)
   end
 
   def build_tree(arr)
-    arr = arr.uniq.sort
-    root = Node.new(arr.shift)
-    place_in_tree = root
-    arr.each do |val|
-      n = Node.new(val)
-      until place_in_tree.left.nil? || place_in_tree.right.nil? do
-        val < place_in_tree.data ? place_in_tree = place_in_tree.left : place_in_tree = place_in_tree.right
-      end
-      val < place_in_tree.data ? place_in_tree.left = n : place_in_tree.right = n
-    end
-    root
   end
 end
 
