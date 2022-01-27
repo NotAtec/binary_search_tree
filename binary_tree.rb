@@ -157,6 +157,11 @@ class Tree
     false
   end
 
+  def rebalance
+    arr = inorder
+    @root = build_tree(arr)
+  end
+  
   private
 
   def no_children(higher, left_or_right)
