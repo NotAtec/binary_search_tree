@@ -129,6 +129,12 @@ class Tree
     order unless block_given?
   end
 
+  def height(node)
+    return 0 unless node
+    
+    [height(node.left), height(node.right)].max + 1
+  end
+
   private
 
   def no_children(higher, left_or_right)
