@@ -93,23 +93,14 @@ class Tree
 
   def level_order
     queue = [@root]
-    if block_given?
-      until queue.length.zero?
-        current = queue.shift
-        queue << current.left unless current.left.nil?
-        queue << current.right unless current.right.nil?
-        yield current
-      end
-    else
-      order = []
-      until queue.length.zero?
-        current = queue.shift
-        queue.push(current.left) unless current.left.nil?
-        queue.push(current.right) unless current.right.nil?
-        order << current
-      end
-      order
+    order = []
+    until queue.length.zero?
+      current = queue.shift
+      queue << current.left unless current.left.nil?
+      queue << current.right unless current.right.nil?
+      block_given? ? yield(current) : order << current
     end
+    order unless block_given?
   end 
 
   def preorder
