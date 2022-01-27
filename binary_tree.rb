@@ -56,6 +56,12 @@ class Tree
 
   def find(val)
     position = @root
+    loop do
+      return position if val == position.data
+      return nil if position.data.nil?
+
+      position = val < position.data ? position.left : position.right
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -67,5 +73,5 @@ end
 
 t = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 t.pretty_print
-t.insert(2)
-t.pretty_print
+p t.find(8)
+p t.find(324)
