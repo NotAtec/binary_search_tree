@@ -92,7 +92,7 @@ class Tree
   end
 
   def level_order
-    queue = @root
+    queue = [@root]
     if block_given?
       until queue.length.zero?
         current = queue.shift
@@ -111,7 +111,7 @@ class Tree
       order
     end
   end 
-  
+
   private
 
   def no_children(higher, left_or_right)
