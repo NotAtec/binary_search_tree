@@ -34,26 +34,30 @@ class Tree
   end
 
   def insert(val)
-    temp = @root
+    position = @root
     loop do
-      if val < temp.data
-        if temp.left == nil
-          temp.left = Node.new(val)
+      if val < position.data
+        if position.left == nil
+          position.left = Node.new(val)
           return val
         end
 
-        temp = temp.left
+        position = position.left
       else
-        if temp.right == nil
-          temp.right = Node.new(val)
+        if position.right == nil
+          position.right = Node.new(val)
           return val
         end
 
-        temp = temp.right
+        position = position.right
       end
     end
   end
-  
+
+  def find(val)
+    position = @root
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
