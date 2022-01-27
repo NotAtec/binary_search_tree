@@ -28,8 +28,8 @@ class Tree
     left = build_tree(arr[0..(arr.length / 2).floor - 1])
     right = build_tree(arr[(arr.length / 2).floor + 1..-1])
 
-    middle.left = left == [] ? nil : left
-    middle.right = right == [] ? nil : right
+    middle.left = left
+    middle.right = right
     middle
   end
 
