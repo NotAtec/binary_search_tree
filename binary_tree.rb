@@ -21,20 +21,39 @@ class Tree
   end
 
   def build_tree(arr)
-    return Node.new(arr) if arr.length <= 1
+    return Node.new(arr[0]) if arr.length <= 1
 
     middle = Node.new(arr[(arr.length / 2).floor])
 
     left = build_tree(arr[0..(arr.length / 2).floor - 1])
     right = build_tree(arr[(arr.length / 2).floor + 1..-1])
 
-    middle.left = left
-    middle.right = right
+    middle.left = left == [] ? nil : left
+    middle.right = right == [] ? nil : right
     middle
   end
 
+  def insert(val)
+    temp = @root
+    loop do
+      if val < temp.data
+        if temp.left == nil
+          temp.left = Node.new(val)
+          return val
+        end
+
+        temp = temp.left
+      else
+        if temp.right == nil
+          temp.right = Node.new(val)
+          return val
+        end
+
+        temp = temp.right
+      end
+    end
+  end
+
 end
-
-
 
 t = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
