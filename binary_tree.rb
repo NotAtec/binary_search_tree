@@ -98,7 +98,7 @@ class Tree
       current = queue.shift
       queue << current.left unless current.left.nil?
       queue << current.right unless current.right.nil?
-      block_given? ? yield(current) : order << current
+      block_given? ? yield(current) : order << current.data
     end
     order unless block_given?
   end
@@ -110,7 +110,7 @@ class Tree
       current = stack.pop
       stack << current.right unless current.right.nil?
       stack << current.left unless current.left.nil?
-      block_given? ? yield(current) : order << current
+      block_given? ? yield(current) : order << current.data
     end
     order unless block_given?
   end
