@@ -161,7 +161,7 @@ class Tree
     arr = inorder
     @root = build_tree(arr)
   end
-  
+
   private
 
   def no_children(higher, left_or_right)
@@ -218,3 +218,26 @@ class Tree
     s
   end
 end
+
+# Test Script
+tree = Tree.new(Array.new(15) { rand(1..100) })
+tree.pretty_print
+p tree.balanced?
+puts "Pre Order"
+p tree.preorder
+puts "Post Order"
+p tree.postorder
+puts "In Order"
+p tree.inorder
+5.times { tree.insert(rand(101..200)) }
+tree.pretty_print
+p tree.balanced?
+tree.rebalance
+tree.pretty_print
+p tree.balanced?
+puts "Pre Order"
+p tree.preorder
+puts "Post Order"
+p tree.postorder
+puts "In Order"
+p tree.inorder
