@@ -116,8 +116,12 @@ class Tree
   end
 
   def postorder
-    p stack = postorder_stack
+    stack = postorder_stack
+    order = []
+    stack.each { |node| block_given? ? yield(node) : order << node.data }
+    order unless block_given?
   end
+
   private
 
   def no_children(higher, left_or_right)
@@ -161,6 +165,6 @@ class Tree
       reader << current.left unless current.left.nil?
       reader << current.right unless current.right.nil?
     end
-    stack.reverse
+    stack.reverse.uniq
   end
 end
