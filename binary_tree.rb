@@ -112,6 +112,18 @@ class Tree
     end
   end 
 
+  def preorder
+    stack = [@root]
+    order = []
+    until stack.length.zero?
+      current = stack.pop
+      stack << current.right unless current.right.nil?
+      stack << current.left unless current.left.nil?
+      block_given? ? yield(current) : order << current
+    end
+    order unless block_given?
+  end
+
   private
 
   def no_children(higher, left_or_right)
