@@ -101,7 +101,7 @@ class Tree
       block_given? ? yield(current) : order << current
     end
     order unless block_given?
-  end 
+  end
 
   def preorder
     stack = [@root]
@@ -115,6 +115,9 @@ class Tree
     order unless block_given?
   end
 
+  def postorder
+    p stack = postorder_stack
+  end
   private
 
   def no_children(higher, left_or_right)
@@ -145,5 +148,19 @@ class Tree
     end
     pos == higher.right ? delete(higher.right.data) : higher.left = nil
     pos.data
+  end
+
+  def postorder_stack
+    reader = [@root]
+    stack = []
+    until reader.length.zero?
+      current = reader.pop
+      stack << current
+      stack << current.left unless current.left.nil?
+      stack << current.right unless current.right.nil?
+      reader << current.left unless current.left.nil?
+      reader << current.right unless current.right.nil?
+    end
+    stack.reverse
   end
 end
