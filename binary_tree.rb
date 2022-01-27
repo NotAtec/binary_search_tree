@@ -131,8 +131,19 @@ class Tree
 
   def height(node)
     return 0 unless node
-    
+
     [height(node.left), height(node.right)].max + 1
+  end
+
+  def depth(node)
+    position = @root
+    i = 0
+    loop do
+      return i if position == node
+
+      i += 1
+      position = node.data < position.data ? position.left : position.right
+    end
   end
 
   private
