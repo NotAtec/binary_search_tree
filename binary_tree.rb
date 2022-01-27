@@ -122,6 +122,13 @@ class Tree
     order unless block_given?
   end
 
+  def inorder
+    queue = inorder_queue.flatten
+    order = []
+    queue.each { |node| block_given? ? yield(node) : order << node.data }
+    order unless block_given?
+  end
+
   private
 
   def no_children(higher, left_or_right)
@@ -166,5 +173,15 @@ class Tree
       reader << current.right unless current.right.nil?
     end
     stack.reverse.uniq
+  end
+
+  def inorder_queue(pos = @root)
+    s = []
+    unless pos.nil?
+      s << inorder_queue(pos.left)
+      s << pos
+      s << inorder_queue(pos.right)
+    end
+    s
   end
 end
